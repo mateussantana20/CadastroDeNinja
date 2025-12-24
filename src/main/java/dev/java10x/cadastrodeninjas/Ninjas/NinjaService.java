@@ -2,6 +2,7 @@ package dev.java10x.cadastrodeninjas.Ninjas;
 
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -38,8 +39,12 @@ public class NinjaService {
     }
 
     //Atualizar ninja por ID
-    public NinjaModel alterarNinjasPorId(Long id, NinjaModel ninjaModel) {
-
+    public NinjaModel atualizarNinja(Long id, NinjaModel ninjaAtualizada) {
+      if (ninjaRepository.existsById(id)) {
+          ninjaAtualizada.setId(id);
+          return ninjaRepository.save(ninjaAtualizada);
+      }
+      return null;
     }
 
 }
